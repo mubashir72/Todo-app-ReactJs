@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Todo.css";
 import { MdCheck, MdDeleteForever } from "react-icons/md";
 
@@ -21,13 +21,16 @@ export const Todo = () => {
     setTask((prevTask) => [...prevTask, inputValue]);
     settInputValue("");
   };
-  setInterval(() => {
-    const now = new Date();
-    const formattedDate = now.toLocaleDateString();
-    const formattedTime = now.toLocaleTimeString();
-    setDateTime(`${formattedDate} ${formattedTime}`);
-  }, 1000);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const formattedDate = now.toLocaleDateString();
+      const formattedTime = now.toLocaleTimeString();
+      setDateTime(`${formattedDate} ${formattedTime}`);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <section className="todo-container">
       <header>
