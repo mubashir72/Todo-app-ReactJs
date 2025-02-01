@@ -3,9 +3,14 @@ import "./Todo.css";
 import { TodoForm } from "./componenets/TodoForm";
 import { TodoList } from "./componenets/TodoList";
 import { TodoDate } from "./componenets/TodoDate";
+import {
+  getLocalStorageTodoData,
+  setLocalStorageTodoData,
+} from "./componenets/TodoLocalStorage";
 
 export const Todo = () => {
-  const [task, setTask] = useState([]);
+  const [task, setTask] = useState(() => getLocalStorageTodoData());
+  //const
   const handleFormSubmit = (inputValue) => {
     const { id, content, checked } = inputValue;
     if (!content) return;
@@ -17,10 +22,13 @@ export const Todo = () => {
     setTask((prevTask) => [...prevTask, { id, content, checked }]);
   };
 
+  setLocalStorageTodoData(task);
+
   const handleDeleteTodo = (value) => {
     const updatedTask = task.filter((curTask) => curTask.content !== value);
     setTask(updatedTask);
   };
+
   const handleClearTodoData = () => {
     setTask([]);
   };
@@ -36,6 +44,7 @@ export const Todo = () => {
     setTask(updatedTask);
   };
   //
+
   return (
     <section className="todo-container">
       <header>

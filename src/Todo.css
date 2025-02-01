@@ -11,7 +11,7 @@
     flex-direction: column;
     min-height: 100vh;
     padding-top: 3%;
-    background-image: linear-gradient(100deg, #001214, #001f29);
+    background-image: linear-gradient(100deg, #141313, #141313);
     color: white;
     transition: 0.3s linear;
     overflow: hidden;
